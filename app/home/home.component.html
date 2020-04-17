@@ -7,10 +7,10 @@
                     <GridLayout rows="*, auto, *" columns="8, auto, *, auto, 8" class="main-card-container">
 
                         <GridLayout #badgeLike col="0" colSpan="5" row="0" class="btn btn-square card-badge m-l-16" horizontalAlignment="left" opacity="0">
-                            <Image src="~/images/star.png" class="image"></Image>
+                            <Image src="~/images/pruefen.png" class="image"></Image>
                         </GridLayout>
                         <GridLayout #badgeIgnore col="0" colSpan="5" row="0" class="btn btn-square card-badge m-r-16" horizontalAlignment="right" opacity="0">
-                            <Image src="~/images/cancel.png" class="image"></Image>
+                            <Image src="~/images/schliessen.png" class="image"></Image>
                         </GridLayout>
 
 
@@ -25,19 +25,20 @@
                         </Label>-->
                             <Label col="0" row="1" colSpan="2" [text]="card.title" textWrap="true" class="h1 title"></Label>
                             <Label col="0" row="2" colSpan="2" [text]="card.author" textWrap="true" class="h4 caption"></Label>
-                            <circular-progress-bar [col]="2" [row]="1" [rowSpan]="2" [progress]="card.popularity"></circular-progress-bar>
+                            <!--                             <circular-progress-bar [col]="2" [row]="1" [rowSpan]="2" [progress]="card.popularity"></circular-progress-bar>
+ -->
                         </GridLayout>
 
                         <!-- <Image col="0" row="0" colSpan="5" rowSpan="6" [src]="card.image"
                             stretch="aspectFill" borderRadius="10"></Image> -->
 
 
-                        <GridLayout #btnIgnore col="1" row="2" class="btn btn-square" [isUserInteractionEnabled]="i == 0" (tap)="decline(card)">
-                            <Image src="~/images/cancel.png" class="image"></Image>
+                        <GridLayout #btnIgnore col="1" row="2" class="btn btn-square" style="width: 25%; height: 25%; margin-left: 50px;" [isUserInteractionEnabled]="i == 0" (tap)="decline(card)">
+                            <Image src="~/images/schliessen.png" style="width: 100%; height: 100%;" class="image"></Image>
                         </GridLayout>
 
-                        <GridLayout #btnLike col="3" row="2" class="btn btn-square" [isUserInteractionEnabled]="i == 0" (tap)="like(card)">
-                            <Image src="~/images/star.png" class="image"></Image>
+                        <GridLayout #btnLike col="3" row="2" style="width: 25%; height: 25%; margin-right: 50px;" class="btn btn-square" [isUserInteractionEnabled]="i == 0" (tap)="like(card)">
+                            <Image src="~/images/pruefen.png" style="width: 100%; height: 100%; " class="image"></Image>
                         </GridLayout>
 
 
@@ -88,8 +89,8 @@
         </ios>
         <StackLayout *ngIf="!cards.length" verticalAlignment="center" [@fade]>
             <Image src="~/images/empty.png" class="placeholder-image"></Image>
-            <Label text="No more cards to display" textWrap="true" class="h4 placeholder-label" marginBottom="16"></Label>
-            <Button text="Load more" class="btn btn-primary" marginBottom="40" (tap)="resetCards()"></Button>
+            <Label text="That's it we know everything we need!" textWrap="true" class="h4 placeholder-label" marginBottom="16"></Label>
+            <Button text="Show me my results" class="btn btn-primary" marginBottom="40" (tap)="resetCards()"></Button>
         </StackLayout>
         <ActivityIndicator verticalAlignment="center" [busy]="!isLoaded" class="activity-indicator"></ActivityIndicator>
     </GridLayout>
