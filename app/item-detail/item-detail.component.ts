@@ -5,6 +5,7 @@ import { ScrollEventData } from "tns-core-modules/ui/scroll-view";
 import { Page } from "ui/page";
 import { isIOS } from "tns-core-modules/platform";
 
+
 @Component({
     selector: "ItemDetail",
     moduleId: module.id,
@@ -22,7 +23,8 @@ export class ItemDetailComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        const id = this.route.snapshot.queryParams['id'];
+       //  const id = this.route.snapshot.queryParams['id'];
+        const id = 1
         this.item = this.data.getItem(id);
         if (isIOS) {
             this.page.actionBarHidden = true;

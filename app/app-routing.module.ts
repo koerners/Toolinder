@@ -14,7 +14,6 @@ export const COMPONENTS = [
 
 const routes: Routes = [
     { path: "", redirectTo: "/(homeTab:home//favoritesTab:favorites)", pathMatch: "full" },
-
     { path: "home", component: HomeComponent, outlet: "homeTab" },
     { path: "favorites", component: FavoritesListComponent, outlet: "favoritesTab" },
     { path: "item", component: ItemDetailComponent, outlet: "favoritesTab" }

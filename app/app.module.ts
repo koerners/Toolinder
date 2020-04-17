@@ -16,6 +16,10 @@ import { registerElement } from "nativescript-angular/element-registry";
 import { CardView } from "./nativescript-cardview";
 import { SwipeLayout } from "./nativescript-swipe-layout";
 
+import { HomeComponent } from "./home/home.component";
+import { ItemDetailComponent } from "./item-detail/item-detail.component";
+import { FavoritesListComponent } from "./favorites-list/favorites-list.component";
+
 registerElement("CardView", () => CardView);
 registerElement("SwipeLayout", () => SwipeLayout);
 
@@ -29,7 +33,8 @@ registerElement("SwipeLayout", () => SwipeLayout);
         NativeScriptUIGaugeModule,
         NativeScriptAnimationsModule,
         AppRoutingModule,
-        CoreModule
+        CoreModule,
+        
     ],
     declarations: [
         AppComponent,
@@ -37,7 +42,10 @@ registerElement("SwipeLayout", () => SwipeLayout);
         SearchBarComponent,
         CustomActionBarComponent,
         CircularProgressBarComponent,
-        ...COMPONENTS
+        ItemDetailComponent,
+        HomeComponent,
+        FavoritesListComponent
+
     ],
     schemas: [
         NO_ERRORS_SCHEMA

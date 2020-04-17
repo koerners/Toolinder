@@ -6,6 +6,7 @@ import { TouchGestureEventData } from "tns-core-modules/ui/gestures";
 import { ad, ios } from "tns-core-modules/utils/utils";
 import { isAndroid } from "tns-core-modules/platform";
 
+
 declare var UIApplication: any;
 
 @Component({
