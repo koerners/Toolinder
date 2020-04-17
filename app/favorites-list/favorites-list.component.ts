@@ -23,7 +23,7 @@ export class FavoritesListComponent implements OnDestroy {
     constructor(private _dataService: DataService,
         private routerExtensions: RouterExtensions,
         private _activatedRoute: ActivatedRoute) {
-        this._itemsSubscription = this._dataService.getLikedItems$()
+        this._itemsSubscription = this._dataService.getLikedItems1$()
             .subscribe((items: Array<IDataItem>) => {
                 this.setItems(items);
             });
