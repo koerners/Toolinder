@@ -14,7 +14,7 @@
                         </GridLayout>
 
 
-                        <GridLayout col="0" row="1" colSpan="5" rows="auto, auto, auto" columns="auto, *, auto" class="info" style="background: rgba(0, 0, 0, 0.171);
+                        <GridLayout col="0" row="1" colSpan="5" rows="auto, auto, auto" columns="auto, *, auto" class="info" style="background: white;
                         ">
                             <!--                   <Label col="0" row="0" colSpan="2" class="h5 date"
                             textWrap="true">
@@ -24,10 +24,8 @@
                             </FormattedString> 
                         </Label>-->
                             <Label col="0" row="1" colSpan="2" [text]="card.title" textWrap="true" class="h1 title"></Label>
-                            <!--           <Label col="0" row="2" colSpan="2" [text]="card.author"
-                            textWrap="true" class="h4 caption"></Label>
-                        <circular-progress-bar [col]="2" [row]="1"
-                            [rowSpan]="2" [progress]="card.popularity"></circular-progress-bar> -->
+                            <Label col="0" row="2" colSpan="2" [text]="card.author" textWrap="true" class="h4 caption"></Label>
+                            <circular-progress-bar [col]="2" [row]="1" [rowSpan]="2" [progress]="card.popularity"></circular-progress-bar>
                         </GridLayout>
 
                         <!-- <Image col="0" row="0" colSpan="5" rowSpan="6" [src]="card.image"
@@ -96,6 +94,6 @@
         <ActivityIndicator verticalAlignment="center" [busy]="!isLoaded" class="activity-indicator"></ActivityIndicator>
     </GridLayout>
 
-    <custom-action-bar row="0" title="What is important to you?"></custom-action-bar>
+    <custom-action-bar row="0" title="Tell us what you need"></custom-action-bar>
 
 </GridLayout>

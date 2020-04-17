@@ -1,8 +1,7 @@
 <GridLayout class="page" rows="auto,auto,*" ios:marginBottom="48">
-    <custom-action-bar [row]="0" title="Favorites"></custom-action-bar>
+    <custom-action-bar [row]="0" title="Our Recommendations"></custom-action-bar>
     <search [row]="1" (submit)="onSearch($event)" (clear)="onClear()"></search>
-    <ListView *ngIf="filteredItems && filteredItems.length; else noItems" row="2"
-        [items]="filteredItems" marginTop="24" (touch)="dismissKeyboard($event)">
+    <ListView *ngIf="filteredItems && filteredItems.length; else noItems" row="2" [items]="filteredItems" marginTop="24" (touch)="dismissKeyboard($event)">
         <ng-template let-item="item" let-i="index">
             <list-item [item]="item" (tapped)="onTap(item.id)" (disliked)="onDislike($event)"></list-item>
         </ng-template>
