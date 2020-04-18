@@ -3,16 +3,16 @@ import { BehaviorSubject, Observable } from "rxjs";
 import { filter, map } from "rxjs/operators";
 
 export interface IDataItem {
-    author: string;
+    author?: string;
     caption?: string;
-    date: Date | string;
-    description: string;
+    date?: Date | string;
+    description?: string;
     id: number;
-    image: string;
+    image?: string;
     liked?: boolean;
-    location: string;
+    location?: string;
     popularity?: string | number;
-    title: string;
+    title?: string;
     viewed?: boolean;
 }
 
@@ -98,8 +98,19 @@ export class DataService {
             popularity: 82,
             viewed: false,
             liked: true
+        },
+        {
+            id: 2,
+            image: "https://gesamtschulefroendenberg.de/wp-content/uploads/2015/04/moodle.jpg",
+            title: "Moodle",
+            author: " Martin Dougiamas",
+            location: "2 - 200",
+            description: "Those using the Moodle platform regularly seem to get better grades than those who rarely or never use it.",
+            date: "Free version available",
+            popularity: 82,
+            viewed: false,
+            liked: true
         }
-
 
     );
     
