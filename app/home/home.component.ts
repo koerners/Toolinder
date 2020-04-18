@@ -54,7 +54,9 @@ export class HomeComponent implements OnInit, AfterContentInit {
     }
 
     initCards() {
-        this.cards = this._dataService.getUnseenItems().reverse() || [];
+        setTimeout(() => {
+            this.cards = this._dataService.getUnseenItems().reverse() || [];
+        }, 1000);
     }
 
     swipeLayoutLoaded(event, btnLike, btnIgnore, badgeLike, badgeIgnore) {

@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from "@angular/core";
-import { DataService, IDataItem } from "../core/data.service";
+import { DataService, ToolsItem } from "../core/data.service";
 import { RouterExtensions } from "nativescript-angular";
 import { ActivatedRoute, NavigationExtras } from "@angular/router";
 import { TouchGestureEventData } from "tns-core-modules/ui/gestures";
@@ -16,25 +16,25 @@ declare var UIApplication: any;
 })
 export class FavoritesListComponent implements OnDestroy {
 
-    filteredItems: Array<IDataItem> = [];
+    filteredItems: Array<ToolsItem> = [];
     private _itemsSubscription;
-    private _items: Array<IDataItem>;
+    private _items: Array<ToolsItem>;
     private _searchPhrase: string;
 
     constructor(private _dataService: DataService,
         private routerExtensions: RouterExtensions,
         private _activatedRoute: ActivatedRoute) {
         this._itemsSubscription = this._dataService.getLikedItems1$()
-            .subscribe((items: Array<IDataItem>) => {
+            .subscribe((items: Array<ToolsItem>) => {
                 this.setItems(items);
             });
     }
 
-    set items(items: Array<IDataItem>) {
+    set items(items: Array<ToolsItem>) {
         this._items = items;
     }
 
-    get items(): Array<IDataItem> {
+    get items(): Array<ToolsItem> {
         return this._items;
     }
 
@@ -73,7 +73,7 @@ export class FavoritesListComponent implements OnDestroy {
         }
     }
 
-    private filterItems(items: Array<IDataItem>, text: string): Array<IDataItem> {
+    private filterItems(items: Array<ToolsItem>, text: string): Array<ToolsItem> {
         return items.filter((data) => {
             return data.title.includes(text) || data.author.includes(text);
         });
