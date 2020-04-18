@@ -27,7 +27,7 @@ export interface ToolsItem {
 @Injectable()
 export class DataService {
 
-    apiUrl = "https://demo2804314.mockable.io/";
+    apiUrl = "https://api3.skoerner.com/";
     questionJson: any;
     toolsJson: any;
 
@@ -49,6 +49,7 @@ export class DataService {
 
         getJSON(this.apiUrl + "questions").then((r: any) => {
             this.questionJson = r;
+    
             var i;
             for (i = 0; i < this.questionJson.length; i++) {
                 let id = this.questionJson[i].id;
@@ -77,20 +78,11 @@ export class DataService {
         let send = null;
         if(this._items.length>1){
            send =  JSON.stringify(this.getLikedItems());
-           console.log(send);
-      }
-        
+      } else{
 
-        request({
-            url: this.apiUrl+"result",
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-
-            content: send
-        }).then((response) => {
-
-
-            this.toolsJson = response.content.toJSON();
+        getJSON(this.apiUrl + "loadAll").then((r: any) => {
+            this.toolsJson = r;
+    
             var i;
             for (i = 0; i < this.toolsJson.length; i++) {
 
@@ -112,6 +104,49 @@ export class DataService {
             this._tools$ = new BehaviorSubject<Array<ToolsItem>>(this.cloneItems1());
 
         }, (e) => {
+            console.log(e);
+        });
+
+
+        return;
+    }
+
+      console.log(send);
+
+        
+        request({
+            url: this.apiUrl+"result",
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            content: send
+        }).then((response) => {
+
+
+            this.toolsJson = response.content.toJSON();
+
+            var i;
+            for (i = 0; i < this.toolsJson.length; i++) {
+
+                this._tools.push(
+                    {
+                        id: this.toolsJson[i].id,
+                        name: this.toolsJson[i].name,
+                        company: this.toolsJson[i].company,
+                        price: this.toolsJson[i].price,
+                        users: this.toolsJson[i].users,
+                        picture: this.toolsJson[i].picture,
+                        established: this.toolsJson[i].established,
+                        keywords: this.toolsJson[i].keywords,
+                        pro: this.toolsJson[i].pro,
+                        con: this.toolsJson[i].con
+                    }
+                )
+            }
+            this._tools$ = new BehaviorSubject<Array<ToolsItem>>(this.cloneItems1());
+            console.log(this._tools);
+
+        }, (e) => {
+            console.log(e);
         });
         
     }
@@ -121,7 +156,6 @@ export class DataService {
 
         this.getQuestions();
         this.getTools();
-
         this._items$ = new BehaviorSubject<Array<IDataItem>>(this.cloneItems());
         this._tools$ = new BehaviorSubject<Array<ToolsItem>>(this.cloneItems1());
     }
@@ -171,7 +205,7 @@ export class DataService {
         for (var i in liked) {
             go.push(
                 {
-                    id: liked[i].id,
+                    q_id: liked[i].id,
                     response: liked[i].liked
                 }
             )
