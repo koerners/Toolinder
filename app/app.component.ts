@@ -5,7 +5,7 @@ import { View } from "tns-core-modules/ui/core/view";
 import { AnimationCurve } from "tns-core-modules/ui/enums";
 import { Image } from "tns-core-modules/ui/image";
 import { TabView } from "tns-core-modules/ui/tab-view";
-import { DataService, IDataItem } from "./core/data.service";
+import { DataService, IDataItem, ToolsItem } from "./core/data.service";
 import { ad, ios } from "tns-core-modules/utils/utils";
 import { isAndroid } from "tns-core-modules/platform";
 
@@ -28,8 +28,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private _favItemsLength = 0;
 
     constructor(private _dataService: DataService) {
-        this._itemsSubscription = this._dataService.getLikedItems$()
-            .subscribe((items: Array<IDataItem>) => {
+        this._itemsSubscription = this._dataService.getLikedItems1$()
+            .subscribe((items: Array<ToolsItem>) => {
                 if (this.tabIndex === 1 && items.length !== this._favItemsLength) {
                     this.notifyNewFav();
                 }

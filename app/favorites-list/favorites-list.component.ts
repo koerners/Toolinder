@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { DataService, ToolsItem } from "../core/data.service";
 import { RouterExtensions } from "nativescript-angular";
 import { ActivatedRoute, NavigationExtras } from "@angular/router";
@@ -24,12 +24,22 @@ export class FavoritesListComponent implements OnDestroy {
     constructor(private _dataService: DataService,
         private routerExtensions: RouterExtensions,
         private _activatedRoute: ActivatedRoute) {
-            console.log("KONSTRUKTORRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
             setTimeout(() => {
                 this._itemsSubscription = this._dataService.getLikedItems1$()
                 .subscribe((items: Array<ToolsItem>) => {
                     this.setItems(items);
                 });            }, 2000);
+    }
+
+
+    reloadTools(){
+
+        setTimeout(() => {
+            this._itemsSubscription = this._dataService.getLikedItems1$()
+            .subscribe((items: Array<ToolsItem>) => {
+                this.setItems(items);
+            });            }, 1000);
+
     }
 
     set items(items: Array<ToolsItem>) {
@@ -46,6 +56,7 @@ export class FavoritesListComponent implements OnDestroy {
         this.filteredItems = !!this._searchPhrase ? this.filterItems(items, this._searchPhrase) : this.items;
     }
 
+
     ngOnDestroy(): void {
         this._itemsSubscription.unsubscribe();
     }
@@ -58,6 +69,7 @@ export class FavoritesListComponent implements OnDestroy {
     onClear() {
         this._searchPhrase = "";
         this.filteredItems = this.items;
+        this.reloadTools();
     }
 
     onDislike(args) {

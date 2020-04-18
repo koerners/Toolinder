@@ -14,14 +14,15 @@ export interface IDataItem {
 export interface ToolsItem {
     id: any;
     name: string;
-    company: string;
-    price: string;
-    users: any;
-    picture: string;
-    established: boolean;
-    keywords: number[];
-    pro: string[];
-    con: string[];
+    company?: string;
+    price?: string;
+    users?: any;
+    picture?: string;
+    description?: string;
+    established?: boolean;
+    keywords?: number[];
+    pro?: string[];
+    con?: string[];
 }
 
 @Injectable()
@@ -97,7 +98,8 @@ export class DataService {
                         established: this.toolsJson[i].established,
                         keywords: this.toolsJson[i].keywords,
                         pro: this.toolsJson[i].pro,
-                        con: this.toolsJson[i].con
+                        con: this.toolsJson[i].con,
+                        description: this.toolsJson[i].description
                     }
                 )
             }
@@ -138,12 +140,14 @@ export class DataService {
                         established: this.toolsJson[i].established,
                         keywords: this.toolsJson[i].keywords,
                         pro: this.toolsJson[i].pro,
-                        con: this.toolsJson[i].con
+                        con: this.toolsJson[i].con,
+                        description: this.toolsJson[i].description
+
                     }
                 )
             }
             this._tools$ = new BehaviorSubject<Array<ToolsItem>>(this.cloneItems1());
-            console.log(this._tools);
+
 
         }, (e) => {
             console.log(e);
