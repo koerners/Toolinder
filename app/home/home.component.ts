@@ -132,5 +132,6 @@ export class HomeComponent implements OnInit, AfterContentInit {
         this._currentSwipeLayout = this._swipeLayouts[0];
         this._dataService.updateItem(card);
         this._cd.detectChanges();
+        this._dataService.getTools();
     }
 }

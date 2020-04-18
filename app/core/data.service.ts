@@ -5,98 +5,123 @@ import { getFile, getImage, getJSON, getString, request, HttpResponse } from "tn
 
 export interface IDataItem {
     text?: string;
-    id: number;
+    id: any;
     liked?: boolean;
     title?: string;
     viewed?: boolean;
 }
 
 export interface ToolsItem {
-    author?: string;
-    caption?: string;
-    date?: Date | string;
-    description?: string;
-    id: number;
-    image?: string;
-    liked?: boolean;
-    location?: string;
-    popularity?: string | number;
-    title?: string;
-    viewed?: boolean;
+    id: any;
+    name: string;
+    company: string;
+    price: string;
+    users: any;
+    picture: string;
+    established: boolean;
+    keywords: number[];
+    pro: string[];
+    con: string[];
 }
 
 @Injectable()
 export class DataService {
+
+    apiUrl = "https://demo2804314.mockable.io/";
+    questionJson: any;
+    toolsJson: any;
+
+
+
 
     private _items$: BehaviorSubject<Array<IDataItem>>;
     private _items = new Array<IDataItem>(
 
     );
 
-    
+
     private _tools$: BehaviorSubject<Array<ToolsItem>>;
     private _tools = new Array<ToolsItem>(
-        {
-            id: 1,
-            image: "https://lh3.googleusercontent.com/8nwT1oyitY4nAh1zasfOCJzgsN-svQus2KDXhHGhMJrVarAdSu1AGPAyGULjb57ASJg",
-            title: "Team Viewer",
-            author: "TeamViewer AG",
-            location: "2 - 5",
-            description: "Obraz jest wyjątkową ekspresją artysty. Praca jest dedykowanym portretem Cmili Cobello. Abstrakcyjna gra świateł i cienia za pomocą 4 kolorów oddaje złożoność jakie chciał osiągnąć artysta oraz prosty panton barw które budują całą narrację. Dużą wagę można zaobserwować w detalu, ponieważ jest to grafika wektorowa możemy dostrzec nietypowy detal włosów oraz światło, które rozświetla końcówki. Obraz przedstawia piękno kobiety, oraz drzemiącą magię jej temperamentu. Zimne barwy oddają chłód który symbolizuje żal między uczuciem wynikającym z rozstania.",
-            date: "Free version available",
-            popularity: 82,
-            viewed: false,
-            liked: true
-        },
-        {
-            id: 2,
-            image: "https://gesamtschulefroendenberg.de/wp-content/uploads/2015/04/moodle.jpg",
-            title: "Moodle",
-            author: " Martin Dougiamas",
-            location: "2 - 200",
-            description: "Those using the Moodle platform regularly seem to get better grades than those who rarely or never use it.",
-            date: "Free version available",
-            popularity: 82,
-            viewed: false,
-            liked: true
-        }
-
     );
-    questionJson: any;
 
 
-        getQuestions(){
+    getQuestions() {
 
-            const apiUrl = "https://demo2804314.mockable.io/";
+        getJSON(this.apiUrl + "questions").then((r: any) => {
+            this.questionJson = r;
+            var i;
+            for (i = 0; i < this.questionJson.length; i++) {
+                let id = this.questionJson[i].id;
+                let text = this.questionJson[i].text;
+
+                this._items.push(
+                    {
+                        id: id,
+                        text: text,
+                        viewed: false,
+                        liked: false
+                    }
+                )
+            }
+            this._items$ = new BehaviorSubject<Array<IDataItem>>(this.cloneItems());
+
+        }, (e) => {
+        });
+
+    }
+
+
+
+    getTools() {
+
+        let send = null;
+        if(this._items.length>1){
+           send =  JSON.stringify(this.getLikedItems());
+           console.log(send);
+      }
         
-            getJSON(apiUrl+"questions").then((r: any) => {
-                this.questionJson = r;
-                var i;
-                for (i = 0; i < this.questionJson.length; i++) {
-                    let id = this.questionJson[i].id;   
-                    let text = this.questionJson[i].text;   
-    
-                    this._items.push(
-                        {
-                            id: id,
-                            text: text,
-                            viewed: false,
-                            liked: false
-                        }
-                    )
-                }
-                this._items$ = new BehaviorSubject<Array<IDataItem>>(this.cloneItems());
-    
-            }, (e) => {
-            });
-    
-        }
 
-    
-    
+        request({
+            url: this.apiUrl+"result",
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+
+            content: send
+        }).then((response) => {
+
+
+            this.toolsJson = response.content.toJSON();
+            var i;
+            for (i = 0; i < this.toolsJson.length; i++) {
+
+                this._tools.push(
+                    {
+                        id: this.toolsJson[i].id,
+                        name: this.toolsJson[i].name,
+                        company: this.toolsJson[i].company,
+                        price: this.toolsJson[i].price,
+                        users: this.toolsJson[i].users,
+                        picture: this.toolsJson[i].picture,
+                        established: this.toolsJson[i].established,
+                        keywords: this.toolsJson[i].keywords,
+                        pro: this.toolsJson[i].pro,
+                        con: this.toolsJson[i].con
+                    }
+                )
+            }
+            this._tools$ = new BehaviorSubject<Array<ToolsItem>>(this.cloneItems1());
+
+        }, (e) => {
+        });
+        
+    }
+
+
     constructor() {
 
         this.getQuestions();
+        this.getTools();
+
         this._items$ = new BehaviorSubject<Array<IDataItem>>(this.cloneItems());
         this._tools$ = new BehaviorSubject<Array<ToolsItem>>(this.cloneItems1());
     }
@@ -127,21 +152,31 @@ export class DataService {
     getLikedItems1$(): Observable<Array<ToolsItem>> {
         // TODO: Auswahl des Tools aufgrund der gewählren Dateien
         return this._tools$.asObservable()
-            .pipe(map((tools: Array<ToolsItem>) => tools.filter((item: ToolsItem) => item.liked === true)));
+            .pipe(map((tools: Array<ToolsItem>) => tools.filter((item: ToolsItem) => item)));
     }
 
     getLikedItems1(): Array<ToolsItem> {
-        return this._tools$.getValue().filter((item: ToolsItem) => item.liked);
+        return this._tools$.getValue().filter((item: ToolsItem) => item);
     }
-    
+
     getLikedItems$(): Observable<Array<IDataItem>> {
         // TODO: Auswahl des Tools aufgrund der gewählren Dateien
         return this._items$.asObservable()
             .pipe(map((items: Array<IDataItem>) => items.filter((item: IDataItem) => item.liked === true)));
     }
 
-    getLikedItems(): Array<IDataItem> {
-        return this._items$.getValue().filter((item: IDataItem) => item.liked);
+    getLikedItems(): Array<any> {
+        let liked =  this._items$.getValue().filter((item: IDataItem) => item.viewed);
+        let go = new Array<any>();
+        for (var i in liked) {
+            go.push(
+                {
+                    id: liked[i].id,
+                    response: liked[i].liked
+                }
+            )
+        }
+        return go;
     }
 
     updateItem(item: IDataItem): void {
@@ -163,7 +198,7 @@ export class DataService {
 
     private cloneItems1(): Array<ToolsItem> {
         return JSON.parse(JSON.stringify(this._tools));
-    }   
+    }
     private cloneItems(): Array<IDataItem> {
 
         return JSON.parse(JSON.stringify(this._items));

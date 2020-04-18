@@ -25,6 +25,7 @@ export class ItemDetailComponent implements OnInit {
     ngOnInit(): void {
         const id = this.route.snapshot.queryParams['id'];
         this.item = this.data.getItem(id);
+
         if (isIOS) {
             this.page.actionBarHidden = true;
         }
