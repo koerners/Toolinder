@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, OnInit, ChangeDetectorRef } from "@angular/core";
+import { AfterContentInit, Component, OnInit, ChangeDetectorRef,  EventEmitter, Input, Output } from "@angular/core";
 import { DataService, IDataItem } from "../core/data.service";
 import { GestureTypes, PanGestureEventData, TouchGestureEventData } from "tns-core-modules/ui/gestures";
 import { isAndroid } from "tns-core-modules/platform";
@@ -23,6 +23,7 @@ import { animate, style, transition, trigger } from "@angular/animations";
     ]
 })
 export class HomeComponent implements OnInit, AfterContentInit {
+
     cards: Array<IDataItem>;
     gestureMode: GESTURE_MODE;
     isLoaded: boolean = false;
@@ -137,5 +138,6 @@ export class HomeComponent implements OnInit, AfterContentInit {
         this._dataService.updateItem(card);
         this._cd.detectChanges();
         this._dataService.getTools();
+
     }
 }

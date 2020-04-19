@@ -17,6 +17,8 @@ export class SearchBarComponent {
     searchPhrase: string;
 
     onLoaded(args) {
+        this.clear.emit();
+
         const nativeView = <SearchBar>args.object;
         if (isIOS) {
             nativeView.nativeView.searchBarStyle = UISearchBarStyle.Prominent;
@@ -24,6 +26,7 @@ export class SearchBarComponent {
         } else {
             nativeView.android.clearFocus();
         }
+
     }
 
     onSubmit(args) {

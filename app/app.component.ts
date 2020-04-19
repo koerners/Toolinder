@@ -83,6 +83,7 @@ export class AppComponent implements OnInit, OnDestroy {
             if (tabView) {
                 if (tabView.android) {
                     tabView.android.removeViewAt(1);
+
                 } else {
                     tabView.ios.tabBar.hidden = true;
                 }
@@ -106,6 +107,7 @@ export class AppComponent implements OnInit, OnDestroy {
         if (index == 2) {
             alert('No content here :( Check out favorites list! Don\'t miss items details.');
         } else {
+
             this.tabIndex = index;
         }
     }

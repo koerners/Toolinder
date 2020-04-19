@@ -75,6 +75,7 @@ export class DataService {
 
 
     getTools() {
+        console.log("GetTools");
         let send = null;
         if(this._items.length>1){
            send =  JSON.stringify(this.getLikedItems());
@@ -102,7 +103,7 @@ export class DataService {
                     }
                 )
             }
-            this._tools$ = new BehaviorSubject<Array<ToolsItem>>(this.cloneItems1());
+            this._tools$.next(this.cloneItems1())
 
         }, (e) => {
             console.log(e);
@@ -147,13 +148,15 @@ export class DataService {
                     }
                 )
             }
-            this._tools$ = new BehaviorSubject<Array<ToolsItem>>(this.cloneItems1());
+            this._tools$.next(this.cloneItems1());
 
 
         }, (e) => {
             console.log(e);
         });
         
+        console.log(this._tools.length);
+
     }
 
 

@@ -58,7 +58,6 @@ export class ItemDetailComponent implements OnInit {
 
 
     onTap(src: string){
-        console.log(src);
     }
 
 
