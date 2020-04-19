@@ -66,9 +66,10 @@ export class ItemDetailComponent implements OnInit {
         const id = this.route.snapshot.queryParams['id'];
         this.item = this.data.getItem(id);
 
-        this.getKeyword(1);
-        this.getKeyword(2);
-        this.getKeyword(3);
+        this.item.keywords.forEach(element => console.log(this.getKeyword(element)));
+
+
+    
 
 
 

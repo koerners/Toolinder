@@ -7,10 +7,10 @@
                     <GridLayout rows="*, auto, *" columns="8, auto, *, auto, 8" class="main-card-container">
 
                         <GridLayout #badgeLike col="0" colSpan="5" row="0" class="btn btn-square card-badge m-l-16" horizontalAlignment="left" opacity="0">
-                            <Image src="~/images/pruefen.png" class="image"></Image>
+                            <Image src="~/images/moegen.png" class="image"></Image>
                         </GridLayout>
                         <GridLayout #badgeIgnore col="0" colSpan="5" row="0" class="btn btn-square card-badge m-r-16" horizontalAlignment="right" opacity="0">
-                            <Image src="~/images/schliessen.png" class="image"></Image>
+                            <Image src="~/images/nicht-moegen.png" class="image"></Image>
                         </GridLayout>
 
 
@@ -33,11 +33,11 @@
 
 
                         <GridLayout #btnIgnore col="1" row="2" class="btn btn-square" style="width: 25%; height: 25%; margin-left: 50px;" [isUserInteractionEnabled]="i == 0" (tap)="decline(card)">
-                            <Image src="~/images/schliessen.png" style="width: 100%; height: 100%;" class="image"></Image>
+                            <Image src="~/images/nicht-moegen.png" style="width: 100%; height: 100%;" class="image"></Image>
                         </GridLayout>
 
                         <GridLayout #btnLike col="3" row="2" style="width: 25%; height: 25%; margin-right: 50px;" class="btn btn-square" [isUserInteractionEnabled]="i == 0" (tap)="like(card)">
-                            <Image src="~/images/pruefen.png" style="width: 100%; height: 100%; " class="image"></Image>
+                            <Image src="~/images/moegen.png" style="width: 100%; height: 100%; " class="image"></Image>
                         </GridLayout>
 
 
