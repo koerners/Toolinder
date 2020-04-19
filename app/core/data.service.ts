@@ -243,7 +243,10 @@ export class DataService {
     }
 
     resetItems(): void {
+        this.getQuestions();
         this._items$.next(this.cloneItems());
+        this.getTools();
+        this._tools$.next(this.cloneItems1());
     }
 
     private cloneItems1(): Array<ToolsItem> {

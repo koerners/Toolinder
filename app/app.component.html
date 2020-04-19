@@ -7,13 +7,13 @@
     <TabView col="0" row="0" colSpan="3" rowSpan="2" [(ngModel)]="tabIndex"
         width="100%" androidTabsPosition="bottom" (loaded)="onTabViewLoaded($event)">
 
-        <page-router-outlet *tabItem="{title: 'Search'}" name="favoritesTab">
+        <page-router-outlet  actionBarVisibility="never" *tabItem="{title: 'Search'}" name="favoritesTab">
         </page-router-outlet>
 
-        <page-router-outlet *tabItem="{title: 'Home'}" name="homeTab">
+        <page-router-outlet  actionBarVisibility="never" *tabItem="{title: 'Home'}" name="homeTab">
         </page-router-outlet>
 
-        <StackLayout *tabItem="{title: 'Calendar'}" name="calendarTab">
+        <StackLayout  actionBarVisibility="never" *tabItem="{title: 'Calendar'}" name="calendarTab">
         </StackLayout>
 
     </TabView>
