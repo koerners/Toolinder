@@ -26,6 +26,8 @@ export class HomeComponent implements OnInit, AfterContentInit {
     cards: Array<IDataItem>;
     gestureMode: GESTURE_MODE;
     isLoaded: boolean = false;
+    go: boolean = false;
+
     swipeLayoutAnimated: ANIMATION_STATE;
     private _swipeLayouts: Array<SwipeLayout>;
     private _currentSwipeLayout: SwipeLayout;
@@ -37,7 +39,7 @@ export class HomeComponent implements OnInit, AfterContentInit {
     }
 
     ngAfterContentInit(): void {
-        if (isAndroid) {
+/*         if (isAndroid) {
             setTimeout(() => {
                 this.isLoaded = true;
             }, 2200);
@@ -45,18 +47,20 @@ export class HomeComponent implements OnInit, AfterContentInit {
             setTimeout(() => {
                 this.isLoaded = true;
             }, 500);
-        }
+        } */
 
     }
 
     ngOnInit(): void {
-        this.initCards();
+       //  this.initCards();
     }
 
     initCards() {
         setTimeout(() => {
-            this.cards = this._dataService.getUnseenItems().reverse() || [];
-        }, 1000);
+            this.cards = this._dataService.getUnseenItems() || [];
+            this.go = true;
+            this.isLoaded = true;
+        }, 100);
     }
 
     swipeLayoutLoaded(event, btnLike, btnIgnore, badgeLike, badgeIgnore) {

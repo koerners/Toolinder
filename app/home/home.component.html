@@ -86,14 +86,18 @@
                 </CardView>
             </SwipeLayout>
         </ios>
-        <StackLayout *ngIf="!cards.length" verticalAlignment="center" [@fade]>
+        <StackLayout *ngIf="!go" verticalAlignment="center" [@fade]>
             <Image src="~/images/empty.png" class="placeholder-image"></Image>
-            <Label text="That's it we know everything we need!" textWrap="true" class="h4 placeholder-label" marginBottom="16"></Label>
-            <Button text="Show me my results" class="btn btn-primary" marginBottom="40" (tap)="resetCards()"></Button>
+            <Label text="We are going to ask you some very simple questions to find out what tool suits you best." textWrap="true" class="h4 placeholder-label" marginBottom="16"></Label>
+            <Button text="Start" class="btn btn-primary" marginBottom="40" (tap)="resetCards()"></Button>
+        </StackLayout>
+              <StackLayout *ngIf="!cards.length" verticalAlignment="center" [@fade]>
+            <Image src="~/images/empty.png" class="placeholder-image"></Image>
+            <Label text="That's it! We know everything we need to. Take a look at your 'favorite' tab." textWrap="true" class="h4 placeholder-label" marginBottom="16"></Label>
+            <Button text="Do it again" class="btn btn-primary" marginBottom="40" (tap)="resetCards()"></Button>
         </StackLayout>
         <ActivityIndicator verticalAlignment="center" [busy]="!isLoaded" class="activity-indicator"></ActivityIndicator>
     </GridLayout>
 
-    <custom-action-bar row="0" title="Tell us what you need"></custom-action-bar>
 
 </GridLayout>

@@ -24,11 +24,12 @@ export class FavoritesListComponent implements OnDestroy {
     constructor(private _dataService: DataService,
         private routerExtensions: RouterExtensions,
         private _activatedRoute: ActivatedRoute) {
-            setTimeout(() => {
+
+     /*        setTimeout(() => {
                 this._itemsSubscription = this._dataService.getLikedItems1$()
                 .subscribe((items: Array<ToolsItem>) => {
                     this.setItems(items);
-                });            }, 2000);
+                });            }, 500); */
     }
 
 
@@ -38,7 +39,7 @@ export class FavoritesListComponent implements OnDestroy {
             this._itemsSubscription = this._dataService.getLikedItems1$()
             .subscribe((items: Array<ToolsItem>) => {
                 this.setItems(items);
-            });            }, 1000);
+            });            }, 500);
 
     }
 
@@ -58,7 +59,7 @@ export class FavoritesListComponent implements OnDestroy {
 
 
     ngOnDestroy(): void {
-        this._itemsSubscription.unsubscribe();
+        // this._itemsSubscription.unsubscribe();
     }
 
     onSearch(text: string) {

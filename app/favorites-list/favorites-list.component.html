@@ -6,6 +6,8 @@
             <list-item [item]="item" (tapped)="onTap(item.id)" (disliked)="onDislike($event)"></list-item>
         </ng-template>
     </ListView>
+            <Button height="40" [row]="3" text="Reload" class="btn btn-primary"  (tap)="reloadTools()"></Button>
+
 </GridLayout>
 
 <ng-template #noItems>

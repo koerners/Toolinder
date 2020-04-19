@@ -26,23 +26,54 @@
 
                 <Label class="hr-light m-y-20" backgroundColor="#E7ECF0"></Label>
 
-        
-               <Label *ngFor="let city of item.pro" class="h5 date" verticalAlignment="bottom" marginBottom="0">
+
+                <Label *ngFor="let city of item.pro" class="h5 date" verticalAlignment="bottom" marginBottom="0">
                     <FormattedString>
                         <Span class="fa" text="&#xf067;  "></Span>
                         <Span  [text]="city"></Span>
                     </FormattedString>
 
-                </Label> 
+                </Label>
 
-                   
-               <Label *ngFor="let city of item.con" class="h5 date" verticalAlignment="bottom" marginBottom="0">
+
+                <Label *ngFor="let city of item.con" class="h5 date" verticalAlignment="bottom" marginBottom="0">
                     <FormattedString>
                         <Span class="fa" text="&#xf068;  "></Span>
                         <Span  [text]="city"></Span>
                     </FormattedString>
+                </Label>
 
-                </Label> 
+                <Label class="hr-light m-y-20" backgroundColor="#E7ECF0"></Label>
+
+                <Label class="h3 title text-center" text="Features"></Label>
+                <ListView height="500" row="100000" [items]="keywordsArray" marginTop="24" backgroundColor="white">
+                    <ng-template let-item="item" let-i="index">
+                        <GridLayout columns="*,auto" backgroundColor="white">
+                            <GridLayout col="0" columns="auto,*,auto" rows="auto,auto,auto">
+                                <Label col="1" row="0" class="h4 title m-t-4" marginBottom="0" [text]="item.keyword"></Label>
+                                <Label col="1" row="1" class="h5 caption" [text]="item.citations.text" textWrap="true"></Label>
+                                <Label col="1" row="2" class="h5 date" marginBottom="4" verticalAlignment="bottom">
+
+    
+            <FormattedString>
+                <Span class="fa" text="&#xf007; "></Span>
+                <Span [text]="item.citations.author"></Span>
+            </FormattedString>
+        </Label>
+
+
+
+                            </GridLayout>
+
+                        </GridLayout>
+
+                    </ng-template>
+                </ListView>
+
+
+
+
+
 
             </StackLayout>
         </StackLayout>

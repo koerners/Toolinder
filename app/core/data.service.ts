@@ -75,7 +75,6 @@ export class DataService {
 
 
     getTools() {
-
         let send = null;
         if(this._items.length>1){
            send =  JSON.stringify(this.getLikedItems());
@@ -127,6 +126,8 @@ export class DataService {
             this.toolsJson = response.content.toJSON();
 
             var i;
+            this._tools = [];
+
             for (i = 0; i < this.toolsJson.length; i++) {
 
                 this._tools.push(
@@ -189,16 +190,24 @@ export class DataService {
 
     getLikedItems1$(): Observable<Array<ToolsItem>> {
         // TODO: Auswahl des Tools aufgrund der gewählren Dateien
+
+
+
         return this._tools$.asObservable()
             .pipe(map((tools: Array<ToolsItem>) => tools.filter((item: ToolsItem) => item)));
     }
 
     getLikedItems1(): Array<ToolsItem> {
+
+
+
+
         return this._tools$.getValue().filter((item: ToolsItem) => item);
     }
 
     getLikedItems$(): Observable<Array<IDataItem>> {
-        // TODO: Auswahl des Tools aufgrund der gewählren Dateien
+  
+
         return this._items$.asObservable()
             .pipe(map((items: Array<IDataItem>) => items.filter((item: IDataItem) => item.liked === true)));
     }
